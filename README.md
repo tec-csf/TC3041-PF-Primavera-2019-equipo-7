@@ -111,108 +111,92 @@ La implementación de la API del proyecto se basa en llamadas a los servicios RE
 * Volley
 * https://developer.android.com/training/volley/index.html
 
+* Endpoints para MySQL
+Los siguientes endpoints se conectan a la base de datos de vigilantes en MySQL. De los verbos HTTP, emplean GET para recuperar los datos enviados con el URL. La siguiente lista muestra URL ejemplo, los valores cambian de acuerdo a la petición.
+
+    * eliminarVigilante.php
+        * **Descripción**: PHP que se conecta a la base de datos MySQL, determina si el vigilante a eliminar existe y, de ser así, lo elimina.
+        * **URL**: http://ubiquitous.csf.itesm.mx/~pddm-1196844/Parcial3/ProyectoFinal/test/eliminarVigilante.php/?correo=samantha@deacero.mx
+        * **Formato de la solicitud**: La solicitud incluye el correo electrónico del vigilante a recuperar.
+        * **Formato JSON de la respuesta**: Como respuesta se recibe un JSON con un código y un mensaje, dependiendo del resultado de la operación. 
+        Ejemplo:
+            [{"Codigo":"0","Mensaje":"Usuario no encontrado"}]
+            [{"Codigo":"1","Mensaje":"Usuario eliminado correctamente"}]            
+        
+    * recuperarVigilante.php
+        * **Descripción**: PHP que se conecta a la base de datos MySQL y recupera al vigilante cuyo correo electrónico sea igual al que se recibe con el método GET.
+        * **URL**: http://ubiquitous.csf.itesm.mx/~pddm-1196844/Parcial3/ProyectoFinal/test/recuperarVigilante.php/?correo=123@123.com.
+        * **Formato de la solicitud**: La solicitud incluye el correo electrónico del vigilante a eliminar.
+        * **Formato JSON de la respuesta**: Como respuesta se reciben 2 JSON. El primero indica el resultado de la operación, 0 si no se encontró el usuario y 1 si se encontró.
+        Si se encuentra el usuario, entonces devuelve un segundo JSON con los siguientes elementos: id, nombre, apellidos, correo, contraseña y permisos. 
+        Ejemplo: 
+            [{"Codigo":"1","Mensaje":"Bienvenido"},{"id":"35","nombre":"Sam","apellidos":"Barco Mejia","correo":"123@123.com","contrasenia":"123","permiso":"0"}]
+            [{"Codigo":"0","Mensaje":"Usuario no encontrado"}]
+        
+        
+    * aniadirVigilante.php
+        * **Descripción**: PHP que se conecta a la base de datos MySQL, añade un vigilante a la base de datos.
+        * **URL**: http://ubiquitous.csf.itesm.mx/~pddm-1196844/Parcial3/ProyectoFinal/test/aniadirVigilante.php/?nombre=Nico&apellidos=Barco%20Mejia&correo=nicolas@deacero.mx2&contrasenia=123&permiso=0
+        * **Formato de la solicitud**: Para añadir a un vigilante se debe incluir nombre, apellidos, correo electrónico, contraseña para la aplicación y permisos (0 para vigilantes y 1 para administradores).
+        * **Formato JSON de la respuesta**: 
+            Ejemplo:
+                [{"Codigo":"1","Mensaje":"Usuario añadido correctamente"}]
+                [{"Codigo":"0","Mensaje":"El correo ya está en uso"}]
+        
+    * actualizarVigilante2.php
+        * **Descripción**: PHP que actualiza nombre, apellidos, correo y permisos de un vigilante. Antes de realizar dicha actualización, corrobora que los datos a emplear sean válidos.
+        * **URL**: http://ubiquitous.csf.itesm.mx/~pddm-1196844/Parcial3/ProyectoFinal/test/actualizarVigilante2.php/?nombre=Nicolas&correoOrig=nicolas@deacero.mx&correoNuevo=nicolas@deacero.mx&apellidos=Barco%20Mejia&permiso=1
+        * **Formato de la solicitud**: Para añadir a un vigilante, primero se recupera su información de la base de datos (empleando recuperarVigilante.php) de manera que el administrador vea la información que está guardada. Posteriormente, junto con el correo anterior se envía el nuevo correo a emplear (o el mismo, si no hay cambios), nombre, apellidos, correo electrónico y permisos (0 para vigilantes y 1 para administradores).
+        * **Formato JSON de la respuesta**: Como respuesta se recibe un JSON con un código y un mensaje, dependiendo del resultado de la operación.
+        Ejemplo:
+            Si los datos a actualizar son válidos: [{"Codigo":"1","Mensaje":"El usuario se actualizó correctamente"}]
+            Si se no existe el correo electrónico del usuario a actualizar: [{"Codigo":"01","Mensaje":"El usuario a actualizar no existe"}]
+            Si el nuevo correo electrónico ya está en uso: [{"Codigo":"02","Mensaje":"El nuevo correo ya está en uso"}]
 
 
-
-
-* **Descripción**:
-* **URL**:
-* **Verbos HTTP**:
-* **Headers**:
-* **Formato JSON del cuerpo de la solicitud**: 
-* **Formato JSON de la respuesta**:
-
-Endpoints para MySQL: Los siguientes endpoints se conectan a la base de datos de vigilantes en MySQL. De los verbos HTTP, emplean GET para recuperar los datos enviados con el URL. La siguiente lista muestra URL ejemplo, los valores cambian de acuerdo a la petición.
-
-* recuperarVigilante.php
-
-* Descripción: PHP que se conecta a la base de datos MySQL y recupera al vigilante cuyo correo electrónico sea igual al que se recibe con el método GET.
-*   URL: http://ubiquitous.csf.itesm.mx/~pddm-1196844/Parcial3/ProyectoFinal/test/recuperarVigilante.php/?correo=123@123.com.
-*   Formato de la solicitud: La solicitud incluye el correo electrónico del vigilante a recuperar.
-*  Formato JSON de la respuesta: Como respuesta se reciben 2 JSON. El primero indica el resultado de la operación, 0 si no se encontró el usuario y 1 si se encontró.
-
-* Si se encuentra el usuario, entonces devuelve un segundo JSON con los siguientes elementos: id, nombre, apellidos, correo, contraseña y permisos. 
-Ejemplo: [{"Codigo":"1","Mensaje":"Bienvenido"},{"id":"35","nombre":"Sam","apellidos":"Barco Mejia","correo":"123@123.com","contrasenia":"123","permiso":"0"}]
-[{"Codigo":"0","Mensaje":"Usuario no encontrado"}]
-
-
-* eliminarVigilante.php
-
-* Descripción: PHP que se conecta a la base de datos MySQL, determina si el vigilante a eliminar existe y, de ser así, lo elimina.
-*   URL: http://ubiquitous.csf.itesm.mx/~pddm-1196844/Parcial3/ProyectoFinal/test/eliminarVigilante.php/?correo=samantha@deacero.mx
-*   Formato de la solicitud: La solicitud incluye el correo electrónico del vigilante a eliminar
-*   Formato JSON de la respuesta: Como respuesta se recibe un JSON con un código y un mensaje, dependiendo del resultado de la operación. 
-Ejemplo:
-[{"Codigo":"0","Mensaje":"Usuario no encontrado"}]
-[{"Codigo":"1","Mensaje":"Usuario eliminado correctamente"}]
-
-*   aniadirVigilante.php:
-
-*   Descripción: PHP que se conecta a la base de datos MySQL, añade un vigilante a la base de datos.
-*   URL: http://ubiquitous.csf.itesm.mx/~pddm-1196844/Parcial3/ProyectoFinal/test/aniadirVigilante.php/?nombre=Nico&apellidos=Barco%20Mejia&correo=nicolas@deacero.mx2&contrasenia=123&permiso=0
-*   Formato de la solicitud: Para añadir a un vigilante se debe incluir nombre, apellidos, correo electrónico, contraseña para la aplicación y permisos (0 para vigilantes y 1 para administradores).
-*   Formato JSON de la respuesta: Como respuesta se recibe un JSON con un código y un mensaje, dependiendo del resultado de la operación.
-* Ejemplo:
-[{"Codigo":"1","Mensaje":"Usuario añadido correctamente"}]
-[{"Codigo":"0","Mensaje":"El correo ya está en uso"}]
-
-*   actualizarVigilante2.php
-
-*  Descripción: PHP que actualiza nombre, apellidos, correo y permisos de un vigilante. Antes de realizar dicha actualización, corrobora que los datos a emplear sean válidos.
-*   URL: http://ubiquitous.csf.itesm.mx/~pddm-1196844/Parcial3/ProyectoFinal/test/actualizarVigilante2.php/?nombre=Nicolas&correoOrig=nicolas@deacero.mx&correoNuevo=nicolas@deacero.mx&apellidos=Barco%20Mejia&permiso=1
-*   Formato de la solicitud: Para añadir a un vigilante, primero se recupera su información de la base de datos (empleando recuperarVigilante.php) de manera que el administrador vea la información que está guardada. Posteriormente, junto con el correo anterior se envía el nuevo correo a emplear (o el mismo, si no hay cambios), nombre, apellidos, correo electrónico y permisos (0 para vigilantes y 1 para administradores).
-*   Formato JSON de la respuesta: Como respuesta se recibe un JSON con un código y un mensaje, dependiendo del resultado de la operación.
-* Ejemplo:
-Si los datos a actualizar son válidos: [{"Codigo":"1","Mensaje":"El usuario se actualizó correctamente"}]
-Si se no existe el correo electrónico del usuario a actualizar: [{"Codigo":"01","Mensaje":"El usuario a actualizar no existe"}]
-Si el nuevo correo electrónico ya está en uso: [{"Codigo":"02","Mensaje":"El nuevo correo ya está en uso"}]
 
 * Endpoints para FireBase:
 
-*   Descripción: Firebase cuenta con su propio API REST, que puede ser empleado con los siguientes datos:
-*   ID de la base de datos (deacero-f29ad)
-*   Nombre de la colección
-*   ID del documento
-*   URL: https://firestore.googleapis.com/v1beta1/projects/deacero-f29ad/databases/(default)/documents/envios/2ADMdDeScT2fmo2JxZde 
+    *   Descripción: Firebase cuenta con su propio API REST, que puede ser empleado con los siguientes datos:
+        *   ID de la base de datos (deacero-f29ad)
+        *   Nombre de la colección
+        *   ID del documento
+    *   URL: https://firestore.googleapis.com/v1beta1/projects/deacero-f29ad/databases/(default)/documents/envios/2ADMdDeScT2fmo2JxZde 
+        En el URL anterior se accede a la colección “envios” documento “2ADMdDeScT2fmo2JxZde”
 
-En el URL anterior se accede a la colección “envios” documento “2ADMdDeScT2fmo2JxZde”
-
-*   Formato JSON de la respuesta: La respuesta es un JSON que muestra el nombre del documento, campos, fecha de creación y de última actualización. Los campos varían dependiendo la colección y documento al que se acceda.
-*   Ejemplo:
-{
-  "name": "projects/deacero-f29ad/databases/(default)/documents/envios/2ADMdDeScT2fmo2JxZde",
-  "fields": {
-    "aceptado": {
-      "integerValue": "1"
-    },
-    "placasContenedor": {
-      "stringValue": "abc"
-    },
-    "material": {
-      "stringValue": "x"
-    },
-    "idProveedor": {
-      "stringValue": "1"
-    },
-    "idDireccion": {
-      "stringValue": "1"
-    },
-    "placasCamion": {
-      "stringValue": "abc"
-    },
-    "peso": {
-      "stringValue": "x"
-    },
-    "idConductor": {
-      "stringValue": "1"
-    }
-  },
-  "createTime": "2019-05-03T06:32:58.790883Z",
-  "updateTime": "2019-05-03T06:32:58.790883Z"
-}
-
-
-
+    *   Formato JSON de la respuesta: La respuesta es un JSON que muestra el nombre del documento, campos, fecha de creación y de última actualización. Los campos varían dependiendo la colección y documento al que se acceda.
+    *   Ejemplo:
+        {
+          "name": "projects/deacero-f29ad/databases/(default)/documents/envios/2ADMdDeScT2fmo2JxZde",
+          "fields": {
+            "aceptado": {
+              "integerValue": "1"
+            },
+            "placasContenedor": {
+              "stringValue": "abc"
+            },
+            "material": {
+              "stringValue": "x"
+            },
+            "idProveedor": {
+              "stringValue": "1"
+            },
+            "idDireccion": {
+              "stringValue": "1"
+            },
+            "placasCamion": {
+              "stringValue": "abc"
+            },
+            "peso": {
+              "stringValue": "x"
+            },
+            "idConductor": {
+              "stringValue": "1"
+            }
+          },
+          "createTime": "2019-05-03T06:32:58.790883Z",
+          "updateTime": "2019-05-03T06:32:58.790883Z"
+        }
 
 ## 3.6 Pasos a seguir para utilizar el proyecto
 
