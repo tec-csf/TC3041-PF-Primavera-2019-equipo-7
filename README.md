@@ -219,27 +219,27 @@ En el URL anterior se accede a la colección “envios” documento “2ADMdDeSc
 
 Para comenzar a utilizar el proyecto es necesario contar con un dispositivo Android donde se vaya a correr la aplicación.
 
-1- Se descarga la aplicación al dispositivo desde github.
+    1- Se descarga la aplicación al dispositivo desde github.
 
-2- Se abre la aplicación y se accede al servicio con las credenciales brindadas.
+    2- Se abre la aplicación y se accede al servicio con las credenciales brindadas.
 
 
 ## 4. Referencias
 
 
-*Android Studio
-*https://developer.android.com/docs 
+* Android Studio
+* https://developer.android.com/docs 
 
-*Java
-*https://docs.oracle.com/javase/8/docs/
+* Java
+* https://docs.oracle.com/javase/8/docs/
 
-*FireBase
-*https://firebase.google.com/docs/firestore/quickstart?authuser=0
+* FireBase
+* https://firebase.google.com/docs/firestore/quickstart?authuser=0
 
-*Volley
-*https://developer.android.com/training/volley/index.html
+* Volley
+* https://developer.android.com/training/volley/index.html
 
-*PHP
-*https://www.php.net/manual/en/tutorial.php 
+* PHP
+* https://www.php.net/manual/en/tutorial.php 
 
 
