@@ -62,7 +62,7 @@ Se realizó un análisis de la operativa de DeAcero, de sus requerimientos funci
 
 La arquitectura de nuestra propuesta se basa en la capacidad de escalabilidad por un futuro crecimiento de DeAcero en la industria.  A la vez, busca cumplir requerimientos no funcionales por políticas internas. Con estas políticas y objetivos en mente se decidió almacenar la base de datos SQL de vigilantes en servidores propios de DeAcero, mientras que por escalabilidad se almacenará la base de datos de documentos en servidores de FireBase. La base de datos de. La aplicación se comunicará con los servidores de DeAcero a través de servicios REST desplegados en sus servidores, al mismo tiempo tendrá conexión con las bases de datos de FireBase a través de los servicios de conectividad móvil que ofrece el manejador. Así, nuestra propuesta basa la aplicación móvil como centro de la solución para brindar una propuesta integral y completa ante la necesidad del cliente.
 
-**
+![Imagen](https://github.com/tec-csf/TC3041-PF-Primavera-2019-equipo-7/blob/master/Diagrama.png)
 
 ### 3.3 Frontend
 
@@ -162,9 +162,11 @@ Los siguientes endpoints se conectan a la base de datos de vigilantes en MySQL. 
         *   Nombre de la colección
         *   ID del documento
     *   URL: https://firestore.googleapis.com/v1beta1/projects/deacero-f29ad/databases/(default)/documents/envios/2ADMdDeScT2fmo2JxZde 
+        
         En el URL anterior se accede a la colección “envios” documento “2ADMdDeScT2fmo2JxZde”
 
     *   Formato JSON de la respuesta: La respuesta es un JSON que muestra el nombre del documento, campos, fecha de creación y de última actualización. Los campos varían dependiendo la colección y documento al que se acceda.
+    
     *   Ejemplo:
         {
           "name": "projects/deacero-f29ad/databases/(default)/documents/envios/2ADMdDeScT2fmo2JxZde",
