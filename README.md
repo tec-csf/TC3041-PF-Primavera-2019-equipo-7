@@ -209,6 +209,14 @@ Para comenzar a utilizar el proyecto es necesario contar con un dispositivo Andr
 
     2- Se abre la aplicación y se accede al servicio con las credenciales brindadas.
 
+La carpeta "App" cuenta con más instrucciones detalladas para usar la aplicación.
+
+Si se desea replicar el proyecto, se deben realizar los siguientes pasos:
+
+    1. Acceder a la carpeta dbs y seguir las instrucciones para crear las bases de datos.
+    2. Importar el proyecto de Android Studio como se muestra en la carpeta App
+    3. Descargar los archivos API, modificar los URL empleados en Android Studio para acceder a los servicios propios.
+
 
 ## 4. Referencias
 
