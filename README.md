@@ -1,6 +1,6 @@
 # TC3041 Proyecto  Final Primavera 2019
 
-#*Solución DeAcero*
+# *Solución DeAcero*
 ---
 
 ##### Integrantes:
